@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const navItem = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <Link to='/'><li><a>Home</a></li></Link>
+        <Link to='/contact-us'><li><a>Contact Us</a></li></Link>
+        <Link to='/dashboard'><li><a>Dashboard</a></li></Link>
+        <Link to='menu'><li><a>Our Menu</a></li></Link>
+        <Link to='/shop'><li><a>Our Shop</a></li></Link>
     </>
     return (
         <div className="navbar fixed z-10 bg-opacity-25 bg-black text-white max-w-6xl mx-auto">
