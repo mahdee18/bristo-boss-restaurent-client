@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
+
     const { signIn } = useContext(AuthContext)
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -19,6 +23,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                navigate(from,{replace:true})
             })
             .catch(error => {
                 console.error(error.message)
