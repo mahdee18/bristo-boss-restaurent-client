@@ -4,6 +4,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 
 const SignUp = () => {
@@ -17,17 +18,30 @@ const SignUp = () => {
                 console.log(user)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        console.log('User profile info updated!')
-                        reset()
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Your work has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:3000/user', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
                         })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset()
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Your work has been saved',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/')
+                                }
+                            })
+
                     })
-                navigate('/')
                     .catch(error => {
                         console.error(error)
                     })
@@ -44,7 +58,7 @@ const SignUp = () => {
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
+                        <h1 className="text-5xl font-bold">Sign Up now!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -90,7 +104,8 @@ const SignUp = () => {
                                 <input className="btn btn-primary" type="submit" value="Sign In" />
                             </div>
                         </form>
-                        <span>Already have an Account? <Link to='/login'>Login</Link></span>
+                        <span className='text-center'>Already have an Account? <Link to='/login'>Login</Link></span>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

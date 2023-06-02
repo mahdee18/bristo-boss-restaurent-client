@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
     const location = useLocation()
@@ -79,6 +80,7 @@ const Login = () => {
                             </div>
                             <span><small>New to Bristo Boss? Please <Link to='/signup'>Sign In</Link></small></span>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
