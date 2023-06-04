@@ -7,8 +7,9 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const AllUsers = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery(['users'], async () => {
+    const { data: users = [], refetch } = useQuery(['user'], async () => {
         const res = await axiosSecure.get('/user')
+        console.log(res.data)
         return res.data
     })
     const handleMakeAdmin = user => {
@@ -17,6 +18,7 @@ const AllUsers = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 refetch()
                 if (data.modifiedCount > 0) {
                     Swal.fire({

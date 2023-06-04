@@ -22,8 +22,8 @@ const Dashboard = () => {
                         isAdmin ?
                             <>
                                 <li><NavLink to='/dashboard/userhome' ><FaHome></FaHome>Admin Home</NavLink></li>
-                                <li><NavLink to='/dashboard/reservation'><FaUtensils></FaUtensils> Add Items</NavLink></li>
                                 <li><NavLink to='/dashboard/payment'><FaWallet></FaWallet>Manage Items</NavLink></li>
+                                <li><NavLink to='/dashboard/additems'><FaUtensils></FaUtensils>Add An Items</NavLink></li>
                                 <li><NavLink to='/dashboard/payment'><FaBook></FaBook> Manage Bookings</NavLink></li>
                                 <li><NavLink to='/dashboard/allusers'><FaUsers></FaUsers> All Users</NavLink></li>
                             </>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                     }
 
                     <div className='divider'></div>
-                    <li><NavLink><FaHome></FaHome>Home</NavLink></li>
+                    <li><NavLink to='/'><FaHome></FaHome>Home</NavLink></li>
                     <NavLink to='/menu'><li><FaHamburger></FaHamburger>Menu</li></NavLink>
                     <NavLink to='/order/salad'><li>Order</li></NavLink>
                 </ul>
