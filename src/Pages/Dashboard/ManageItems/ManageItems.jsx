@@ -1,14 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import useCart from '../../../Hooks/useCart';
+import SectionTitle from '../../../components/SectionTitle';
+import useMenu from '../../../Hooks/useMenu';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
-const MyCart = () => {
-    const [cart, refetch] = useCart()
-    console.log(cart)
-    const totalPrice = cart.reduce((sum, item) => item.price + sum, 0)
+const ManageItems = () => {
+    const [axiosSecure] = useAxiosSecure()
+    const [menu, , refetch] = useMenu();
     const handleDelete = (item) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -20,33 +20,30 @@ const MyCart = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/carts/${item._id}`, {
-                    method: 'DELETE',
+                axiosSecure.delete(`/menu/${item._id}`)
+                .then(res=> {
+                    refetch()
+                    if (res.data.deletedCount > 0) {
+                        refetch()
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success')
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount > 0) {
-                            refetch()
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success')
-                        }
-                    })
             }
         })
     }
+
     return (
-        <div className='w-full pt-12'>
+        <div className='w-full'>
+
             <Helmet>
-                <title>Bistro Boss | MyCart</title>
+                <title>Bistro Boss | Manage Items</title>
             </Helmet>
+            <SectionTitle heading='Manage All Items' subheading='Hurry Up'></SectionTitle>
             <div className='uppercase font-semibold flex justify-evenly'>
-                <h3>Total Items : {cart.length}</h3>
-                <h3>Total Price : {totalPrice}</h3>
-                <Link to='/dashboard/payment'>
-                    <button className='btn btn-warning'>Pay</button>
-                </Link>
+                <h3>Total Items : {menu.length}</h3>
             </div>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full mt-12">
@@ -57,13 +54,14 @@ const MyCart = () => {
                             <th>Food</th>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
                         {
-                            cart.map((item, index) =>
+                            menu.map((item, index) =>
                                 <tr>
                                     <td>
                                         {
@@ -83,6 +81,9 @@ const MyCart = () => {
                                     <td className='text-end'>
                                         $ {item.price}
                                     </td>
+                                    <td className='text-end'>
+                                        Details
+                                    </td>
                                     <td className='text-center'>
                                         <button onClick={() => handleDelete(item)} className="btn btn-
                                         bg-red-700 border-0 btn-lg">
@@ -95,9 +96,8 @@ const MyCart = () => {
                 </table>
             </div>
 
-
         </div>
     );
 };
 
-export default MyCart;
+export default ManageItems;
