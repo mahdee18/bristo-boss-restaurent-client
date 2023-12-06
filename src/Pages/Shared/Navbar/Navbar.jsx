@@ -1,4 +1,3 @@
-
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
@@ -26,21 +25,13 @@ const Navbar = () => {
                 user ? <Link to='/dashboard/userhome'><li><a>Dashboard</a></li></Link> : " "
         }
         {
-            user?<Link to='/dashboard/mycart'>
+            user ? <Link to='/dashboard/mycart'>
                 <button className="btn gap-2">
                     <FaShoppingCart></FaShoppingCart>
                     <div className="badge badge-secondary">+{cart?.length || 0}</div>
                 </button>
 
-            </Link>:""
-        }
-
-        {
-            user ?
-                <>
-                    <span>{user?.displayName}</span>
-                    <button onClick={handleLogOut} className='btn btn-ghost'>Log Out</button></> :
-                <><Link to='/login'><li><a>Login</a></li></Link></>
+            </Link> : ""
         }
     </>
     return (
@@ -62,7 +53,13 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn">Login</Link>
+                {
+                    user ?
+                        <>
+                            <span>{user?.displayName}</span>
+                            <button onClick={handleLogOut} className='btn btn-ghost'>Log Out</button></> :
+                        <><Link to='/login' className='btn btn-ghost'>Login</Link></>
+                }
             </div>
         </div>
     );
