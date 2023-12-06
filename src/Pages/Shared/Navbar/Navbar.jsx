@@ -18,10 +18,9 @@ const Navbar = () => {
     }
     const navItem = <>
         <Link to='/'><li><a>Home</a></li></Link>
-        <Link to='/contact'><li><a>Contact</a></li></Link>
         <Link to='/menu'><li><a>Menu</a></li></Link>
         <Link to='/order/salad'><li><a>Order</a></li></Link>
-        <Link to='/shop'><li><a>Our Shop</a></li></Link>
+        <Link to='/order/salad'><li><a>Our Shop</a></li></Link>
         {
             isAdmin ? <Link to='/dashboard/adminhome'><li><a>Dashboard</a></li></Link> :
                 user ? <Link to='/dashboard/userhome'><li><a>Dashboard</a></li></Link> : " "

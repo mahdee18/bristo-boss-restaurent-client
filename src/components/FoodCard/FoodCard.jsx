@@ -21,7 +21,7 @@ const FoodCard = ({ item }) => {
                 price,
                 email: user.email
             };
-            fetch('http://localhost:3000/carts', {
+            fetch('https://bristo-boss-restarent-server.vercel.app/carts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

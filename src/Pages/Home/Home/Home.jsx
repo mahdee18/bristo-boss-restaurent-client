@@ -17,7 +17,7 @@ const Home = () => {
             </Helmet>
 
             <Banner></Banner>
-            <div className='w-6/7 mx-auto'>
+            <div className='w-5/6 mx-auto'>
                 <Category></Category>
                 <PopularItem></PopularItem>
                 <Recommended></Recommended>

@@ -16,7 +16,7 @@ const useCart = () => {
             return response.data;
         },
         // queryFn: async () => {
-        //     const response = await fetch(`http://localhost:3000/carts?email=${user.email}` ,{
+        //     const response = await fetch(`https://bristo-boss-restarent-server.vercel.app/carts?email=${user.email}` ,{
         //         headers:{
         //             authorization:`bearer ${token}`
         //         }
