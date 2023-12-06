@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
-
+ 
 const SignUp = () => {
     const navigate = useNavigate()
     const { createUser, updateUserProfile, } = useContext(AuthContext)

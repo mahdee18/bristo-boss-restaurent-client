@@ -7,7 +7,7 @@ import useCart from '../../../Hooks/useCart';
 import useAdmin from '../../../Hooks/useAdmin';
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
-    const [cart]= useCart()
+    const [cart] = useCart()
     const [isAdmin] = useAdmin()
     const handleLogOut = () => {
         logOut()
@@ -23,16 +23,18 @@ const Navbar = () => {
         <Link to='/order/salad'><li><a>Order</a></li></Link>
         <Link to='/shop'><li><a>Our Shop</a></li></Link>
         {
-            isAdmin? <Link to='/dashboard/adminhome'><li><a>Dashboard</a></li></Link>:
-             <Link to='/dashboard/userhome'><li><a>Dashboard</a></li></Link>
+            isAdmin ? <Link to='/dashboard/adminhome'><li><a>Dashboard</a></li></Link> :
+                user ? <Link to='/dashboard/userhome'><li><a>Dashboard</a></li></Link> : " "
         }
-        <Link to='/dashboard/mycart'>
-            <button className="btn gap-2">
-            <FaShoppingCart></FaShoppingCart>
-                <div className="badge badge-secondary">+{ cart?.length || 0}</div>
-            </button>
+        {
+            user?<Link to='/dashboard/mycart'>
+                <button className="btn gap-2">
+                    <FaShoppingCart></FaShoppingCart>
+                    <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                </button>
 
-        </Link>
+            </Link>:""
+        }
 
         {
             user ?
@@ -43,7 +45,7 @@ const Navbar = () => {
         }
     </>
     return (
-        <div className="navbar fixed z-10 bg-opacity-25 bg-black text-white max-w-6xl mx-auto">
+        <div className="navbar fixed z-10 bg-opacity-25 bg-black text-white mx-auto">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -61,7 +63,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Get started</a>
+                <Link to='/login' className="btn">Login</Link>
             </div>
         </div>
     );

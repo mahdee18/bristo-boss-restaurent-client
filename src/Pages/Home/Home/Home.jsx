@@ -15,13 +15,16 @@ const Home = () => {
             <Helmet>
                 <title>Bristo Boss | Home</title>
             </Helmet>
-            
+
             <Banner></Banner>
-            <Category></Category>
-            <PopularItem></PopularItem>
-            <Recommended></Recommended>
-            <Featured></Featured>
-            <Testimonial></Testimonial>
+            <div className='w-6/7 mx-auto'>
+                <Category></Category>
+                <PopularItem></PopularItem>
+                <Recommended></Recommended>
+                <Featured></Featured>
+                <Testimonial></Testimonial>
+            </div>
+
         </div>
     );
 };

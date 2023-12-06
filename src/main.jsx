@@ -12,7 +12,7 @@ import {
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <div className='mx-auto max-w-6xl'>
+  <div className=''>
     <React.StrictMode>
       <AuthProvider>
         <HelmetProvider>
